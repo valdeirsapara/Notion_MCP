@@ -1,14 +1,21 @@
 from mcp.server.fastmcp import FastMCP
 import requests
-import json
-import asyncio
-from typing import Dict, List, Optional, Any, Union
-from decouple import config
+import os 
+from typing import Dict, List, Optional
 
-mcp = FastMCP("Notion - Manager",)
+from dotenv import load_dotenv, dotenv_values, find_dotenv
+
+load_dotenv(find_dotenv())
+config = dotenv_values(".env")
+
+
+# Remova completamente a declaração de dependências
+mcp = FastMCP("Notion - Manager")
+
+
 BASE_URL = "https://api.notion.com/v1/"
 _headers = {
-    "Authorization": f"Bearer {config('NOTIO_API_KEY')}",
+    "Authorization": f"Bearer {os.environ.get("NOTION_API_KEY")}",
     "Notion-Version": "2022-06-28",
     "Content-Type": "application/json"
 }
