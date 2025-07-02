@@ -21,6 +21,19 @@ _headers = {
 }
 
 @mcp.tool()
+def notion_get_default_database_id() -> str:
+    """
+    Retorna o ID do banco de dados padrão configurado no ambiente.
+    
+    Returns:
+        ID do banco de dados
+    """
+    data_base_id = os.environ.get("NOTION_DATABASE_ID")
+    if not data_base_id:
+        raise ValueError("NOTION_DATABASE_ID não está configurado no ambiente.")
+    return data_base_id
+
+@mcp.tool()
 def notion_query_databases(filter: Optional[Dict] = None, sorts: Optional[List] = None, 
                            start_cursor: Optional[str] = None, page_size: int = 100, data_base_id:str=None) -> Dict:
     """
